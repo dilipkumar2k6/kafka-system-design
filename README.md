@@ -89,5 +89,13 @@ Why distributed?
     - It keep track of messageID. 
     - If consumer dies then consumer will put needle back to messageId
     - Typically Consumer keeps track of messages it reads
-Open question:
-How multiple consumers reads from set of partitions?
+## Consumer Groups
+![](https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Kafka-Consumer-Groups.png)
+- Consumers belongs to same group share a group Id
+- The consumers in a group then divides topic partitions as fairly among themselves as possible by establishing each partition is only consumed by a single consumer from that group
+- Messages are broadcasted to all consumer groups
+- Ideally, the number of partitions is equal to the number of consumers
+- If the number of consumers be greater, the excess consumers are idle, wasting client resources. 
+-  If the number of partitions is greater, some consumers will read from multiple partitions which should not be an issue unless the ordering of messages is important to the use case.
+
+
